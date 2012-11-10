@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Simulator' do
 
   before do    
-    @simulator = ToyRobotSimulator.new
+    @simulator = Simulator.new
   end
 
   it 'moves' do
