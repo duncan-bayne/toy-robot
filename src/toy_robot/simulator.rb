@@ -9,7 +9,12 @@ class Simulator
   end
 
   def execute(commands)
-    commands.each { |command| execute_command(command) }
+    result = ''
+    commands.each do |command| 
+      command_result = execute_command(command) 
+      result << command_result if command_result
+    end
+    result
   end
 
   private
@@ -21,7 +26,10 @@ class Simulator
 
     case operator
     when 'PLACE'
-        place(arguments)
+      place(arguments)
+      nil
+    when 'REPORT'
+      report
     end
   end
 
@@ -33,6 +41,12 @@ class Simulator
 
     @table.place(x, y)
     @robot.orient(orientation)
+  end
+
+  def report
+    position = @table.position
+    orientation = @robot.orientation
+    "#{position[:x]},#{position[:y]},#{orientation.to_s.upcase}\n"
   end
 
 end

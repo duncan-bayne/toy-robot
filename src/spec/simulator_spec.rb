@@ -15,6 +15,16 @@ describe 'Simulator' do
   end
 
   describe '#execute' do
+
+    describe 'REPORT' do
+
+      it 'returns the result in specified format' do
+        @table.should_receive(:position).and_return({ x: 1, y: 2 })
+        @robot.should_receive(:orientation).and_return(:south)
+        @simulator.execute([ 'REPORT' ]).should == "1,2,SOUTH\n"
+      end
+
+    end
     
     describe 'PLACE' do
       
@@ -30,6 +40,7 @@ describe 'Simulator' do
           @simulator.execute([ 'PLACE 0,0,NORTH' ])
         end
       end
+
     end
   end
 end
