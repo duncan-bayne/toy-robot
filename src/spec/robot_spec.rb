@@ -48,4 +48,55 @@ describe 'Robot' do
 
     end
   end
+
+  describe '#vector' do
+
+    describe 'facing north' do
+      
+      before do
+        @robot.orient(:north)
+      end
+
+      it 'moves up' do
+        @robot.vector.should == { x: 0, y: 1 }
+      end
+
+    end
+
+    describe 'facing south' do
+
+      before do
+        @robot.orient(:south)
+      end
+
+      it 'moves down' do
+        @robot.vector.should == { x: 0, y: -1 }
+      end
+
+    end
+
+    describe 'facing west' do
+
+      before do
+        @robot.orient(:west)
+      end
+
+      it 'moves left' do
+        @robot.vector.should == { x: -1, y: 0 }
+      end
+
+    end
+
+    describe 'facing east' do
+
+      before do
+        @robot.orient(:east)
+      end
+
+      it 'moves right' do
+        @robot.vector.should == { x: 1, y: 0 }
+      end
+
+    end
+  end
 end

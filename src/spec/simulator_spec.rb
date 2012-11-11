@@ -16,6 +16,21 @@ describe 'Simulator' do
 
   describe '#execute' do
 
+    describe 'MOVE' do
+
+      it 'retrieves a movement vector from the robot and applies it to the board' do
+        @robot.should_receive(:vector).and_return({ x: 1, y: 1 })
+        @table.should_receive(:position).and_return({ x: 1, y: 1 })
+        @table.should_receive(:place).with(2, 2)
+
+        @simulator.execute([ 'MOVE' ])
+      end
+
+      it 'applies the movement vector to the location on the board' do
+      end
+
+    end
+
     describe 'REPORT' do
 
       it 'returns the result in specified format' do

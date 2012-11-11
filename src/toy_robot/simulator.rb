@@ -30,7 +30,16 @@ class Simulator
       nil
     when 'REPORT'
       report
+    when 'MOVE'
+      move
     end
+  end
+
+  def move
+    vector = @robot.vector
+    position = @table.position
+    @table.place(position[:x] + vector[:x], position[:y] + vector[:y])
+    nil
   end
 
   def place(position)
@@ -41,6 +50,7 @@ class Simulator
 
     @table.place(x, y)
     @robot.orient(orientation)
+    nil
   end
 
   def report
