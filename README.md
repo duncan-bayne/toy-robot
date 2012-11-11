@@ -2,7 +2,7 @@
 toy-robot is a simulator of a toy robot that moves on a tabletop.
 
 ## usage
-toy-robot reads instructions from STDIN, executing them one at a time.  (On a Linux or OSX system, type C-d to generate an EOF character).
+toy-robot reads instructions from STDIN, executing them one at a time until EOF is reached.  (On a Linux or OSX system, type C-d to generate an EOF character).
 
 ### valid commands
 
