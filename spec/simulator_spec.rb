@@ -108,12 +108,28 @@ describe 'Simulator' do
 
       describe 'MOVE' do
 
-        it 'retrieves a movement vector from the robot and applies it to the board' do
-          @robot.should_receive(:vector).and_return({ x: 1, y: 1 })
-          @table.should_receive(:position).and_return({ x: 1, y: 1 })
-          @table.should_receive(:place).with(2, 2)
+        describe 'to a valid place on the table' do
 
-          @simulator.execute('MOVE')
+          it 'retrieves a movement vector from the robot and applies it to the table' do
+            @robot.should_receive(:vector).and_return({ x: 1, y: 1 })
+            @table.should_receive(:position).and_return({ x: 1, y: 1 })
+            @table.should_receive(:place).with(2, 2)
+
+            @simulator.execute('MOVE')
+          end
+
+        end
+
+        describe 'off the table' do
+
+          it 'warns the user and does not move the robot off the table' do
+            @robot.should_receive(:vector).and_return({ x: 1, y: 1 })
+            @table.should_receive(:position).and_return({ x: 4, y: 4 })
+            @table.should_receive(:place).with(5, 5).and_return(nil)
+
+            @simulator.execute('MOVE').should == 'Ignoring MOVE off the table.'
+          end
+
         end
 
       end

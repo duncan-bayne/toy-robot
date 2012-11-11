@@ -41,8 +41,11 @@ class Simulator
     return 'Ignoring MOVE until robot is PLACEd.' unless @table.placed?
     vector = @robot.vector
     position = @table.position
-    @table.place(position[:x] + vector[:x], position[:y] + vector[:y])
-    nil
+    if @table.place(position[:x] + vector[:x], position[:y] + vector[:y])
+      nil
+    else
+      'Ignoring MOVE off the table.'
+    end
   end
 
   def place(position)
