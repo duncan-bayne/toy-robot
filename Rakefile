@@ -1,5 +1,7 @@
 require 'rake'
 require 'rspec/core/rake_task'
+require 'roodi'
+require 'roodi_task'
 
 task default: [ :specs, :quality, :documentation ]
 
@@ -12,6 +14,8 @@ task :documentation do
   system('markdown')
 end
 
-task :quality do
-  system('roodi -config=roodi.yml "**/*.rb"')
+RoodiTask.new(:quality) do |t|
+  t.verbose = true
+  t.config = File.dirname(__FILE__) + '/roodi.yml'
+  t.patterns = [ '**/*.rb' ]
 end
