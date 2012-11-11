@@ -16,6 +16,16 @@ describe 'Simulator' do
 
   describe '#execute' do
 
+    describe 'LEFT' do
+
+      it 'instructs the robot to turn left' do
+        @robot.should_receive(:left)
+        
+        @simulator.execute([ 'LEFT' ])
+      end
+
+    end
+
     describe 'MOVE' do
 
       it 'retrieves a movement vector from the robot and applies it to the board' do
@@ -31,16 +41,6 @@ describe 'Simulator' do
 
     end
 
-    describe 'REPORT' do
-
-      it 'returns the result in specified format' do
-        @table.should_receive(:position).and_return({ x: 1, y: 2 })
-        @robot.should_receive(:orientation).and_return(:south)
-        @simulator.execute([ 'REPORT' ]).should == "1,2,SOUTH\n"
-      end
-
-    end
-    
     describe 'PLACE' do
       
       describe 'at valid co-ordinates in a valid direction' do
@@ -54,6 +54,26 @@ describe 'Simulator' do
           @robot.should_receive(:orient).with(:north)
           @simulator.execute([ 'PLACE 0,0,NORTH' ])
         end
+      end
+
+    end
+
+    describe 'REPORT' do
+
+      it 'returns the result in specified format' do
+        @table.should_receive(:position).and_return({ x: 1, y: 2 })
+        @robot.should_receive(:orientation).and_return(:south)
+        @simulator.execute([ 'REPORT' ]).should == "1,2,SOUTH\n"
+      end
+
+    end
+    
+    describe 'RIGHT' do
+
+      it 'instructs the robot to turn right' do
+        @robot.should_receive(:right)
+        
+        @simulator.execute([ 'RIGHT' ])
       end
 
     end

@@ -32,7 +32,16 @@ class Simulator
       report
     when 'MOVE'
       move
+    when 'LEFT'
+      left
+    when 'RIGHT'
+      right
     end
+  end
+
+  def left
+    @robot.left
+    nil
   end
 
   def move
@@ -59,4 +68,8 @@ class Simulator
     "#{position[:x]},#{position[:y]},#{orientation.to_s.upcase}\n"
   end
 
+  def right
+    @robot.right
+    nil
+  end
 end

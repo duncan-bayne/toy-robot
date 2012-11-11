@@ -6,6 +6,62 @@ describe 'Robot' do
     @robot = Robot.new
   end
 
+  describe '#left' do
+
+    describe 'facing north' do
+      
+      before do
+        @robot.orient(:north)
+        @robot.left
+      end
+
+      it 'faces west' do
+        @robot.orientation.should == :west
+      end
+
+    end
+
+    describe 'facing south' do
+
+      before do
+        @robot.orient(:south)
+        @robot.left
+      end
+
+      it 'faces east' do
+        @robot.orientation.should == :east
+      end
+
+    end
+
+    describe 'facing west' do
+
+      before do
+        @robot.orient(:west)
+        @robot.left
+      end
+
+      it 'faces south' do
+        @robot.orientation.should == :south
+      end
+
+    end
+
+    describe 'facing east' do
+
+      before do
+        @robot.orient(:east)
+        @robot.left
+      end
+
+      it 'faces north' do
+        @robot.orientation.should == :north
+      end
+
+    end
+
+  end
+
   describe '#orient' do
 
     it 'allows orientation to the :north' do
@@ -47,6 +103,62 @@ describe 'Robot' do
       end
 
     end
+  end
+
+  describe '#right' do
+
+    describe 'facing north' do
+      
+      before do
+        @robot.orient(:north)
+        @robot.right
+      end
+
+      it 'faces east' do
+        @robot.orientation.should == :east
+      end
+
+    end
+
+    describe 'facing south' do
+
+      before do
+        @robot.orient(:south)
+        @robot.right
+      end
+
+      it 'faces west' do
+        @robot.orientation.should == :west
+      end
+
+    end
+
+    describe 'facing west' do
+
+      before do
+        @robot.orient(:west)
+        @robot.right
+      end
+
+      it 'faces north' do
+        @robot.orientation.should == :north
+      end
+
+    end
+
+    describe 'facing east' do
+
+      before do
+        @robot.orient(:east)
+        @robot.right
+      end
+
+      it 'faces south' do
+        @robot.orientation.should == :south
+      end
+
+    end
+
   end
 
   describe '#vector' do
