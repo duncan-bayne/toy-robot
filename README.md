@@ -26,7 +26,19 @@ Rotates the robot 90 degrees to the right (i.e. clockwise) without changing the 
 
 Announces the X,Y and F of the robot.
 
-### examples of use
+### installing
+
+Ensure you have [Git](http://git-scm.com/downloads) and [RVM](https://rvm.io/rvm/install/) installed, then:
+
+    git://github.com/duncan-bayne/toy-robot.git
+    cd toy-robot
+    gem install bundler
+    bundle install
+
+RVM will prompt you if you need to install the version of Ruby upon which toy-robot relies (1.9.3).
+
+### running
+
 Interactively:
 
     $ toy_robot/toy_robot.rb 
