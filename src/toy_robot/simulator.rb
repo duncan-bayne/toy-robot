@@ -8,18 +8,7 @@ class Simulator
     @robot = Robot.new
   end
 
-  def execute(commands)
-    result = ''
-    commands.each do |command| 
-      command_result = execute_command(command) 
-      result << command_result if command_result
-    end
-    result
-  end
-
-  private
-
-  def execute_command(command)
+  def execute(command)
     tokens = command.split(/\s+/)
     operator = tokens.first
     arguments = tokens.last
@@ -38,6 +27,8 @@ class Simulator
       right
     end
   end
+
+  private 
 
   def left
     @robot.left
@@ -65,7 +56,7 @@ class Simulator
   def report
     position = @table.position
     orientation = @robot.orientation
-    "#{position[:x]},#{position[:y]},#{orientation.to_s.upcase}\n"
+    "#{position[:x]},#{position[:y]},#{orientation.to_s.upcase}"
   end
 
   def right
