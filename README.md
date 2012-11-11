@@ -8,7 +8,7 @@ toy-robot reads instructions from STDIN, executing them one at a time until EOF 
 
 #### PLACE X,Y,FACING
 
-Put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+Put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.  If the robot is already placed, issuing another *valid* PLACE command will place the robot in the newly specified location.
 
 #### MOVE
 
@@ -70,12 +70,13 @@ I developed toy-robot test first; you can see the [commit log](https://github.co
 
 I made the following assumptions:
 
+ * multiple valid PLACE statements are valid
  * case-sensitivity was by design (e.g. `PLACE` but not `place`)
  * abbreviations are not allowed (e.g. `NORTH` but not `N`)
  * comma separators are required (e.g. `0,0,NORTH` but not `0 0 NORTH`)
  * this is a UNIX program (so it observes the [Rule of Silence](http://www.faqs.org/docs/artu/ch01s06.html) and only reports on errors or when instructed)
 
-Depending upon the time available and the background of the intended users, those assumptions could easily be challenged.  E.g. Windows users are not used to case sensitivity or silent success.
+Depending upon the time available and the background of the intended users, some of those assumptions could easily be challenged.  E.g. Windows users are not used to case sensitivity or silent success.
 
 Specs, documentation and quality checks are automated through rake.  E.g. to display a list of all tasks:
 

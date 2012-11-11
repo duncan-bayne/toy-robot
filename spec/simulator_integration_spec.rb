@@ -51,5 +51,9 @@ describe 'Simulator' do
     @simulator.execute('REPORT').should == 'Ignoring REPORT until robot is PLACEd.'
   end
 
+  it 'applies successive valid PLACEs' do
+    [ 'PLACE -1,-1,NORTH', 'PLACE 0,0,SOUTH' ].each { |command| @simulator.execute command }
+    @simulator.execute('REPORT').should == '0,0,SOUTH'
+  end
 end
 
