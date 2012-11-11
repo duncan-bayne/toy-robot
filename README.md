@@ -28,14 +28,18 @@ Announces the X,Y and F of the robot.
 
 ### installing
 
-Ensure you have [Git](http://git-scm.com/downloads) and [RVM](https://rvm.io/rvm/install/) installed, then:
+Ensure you have [Git](http://git-scm.com/downloads) and either [Ruby 1.9.3](http://www.ruby-lang.org/en/downloads/) or [RVM](https://rvm.io/rvm/install/) installed.  Then in a console execute:
 
-    git://github.com/duncan-bayne/toy-robot.git
+    git clone git://github.com/duncan-bayne/toy-robot.git
     cd toy-robot
     gem install bundler
     bundle install
 
 RVM will prompt you if you need to install the version of Ruby upon which toy-robot relies (1.9.3).
+
+### supported operating systems
+
+toy-robot *should* install on pretty much any recent UNIX or UNIX-like operating system, and Microsoft Windows.  I have tested it on 64-bit Linux Mint 13 (Maya) and 32-bit Windows 7.
 
 ### running
 
@@ -116,7 +120,7 @@ To run everything:
     {}
     Done.
 
-If I were to add any more commands, or increase the complexity of the commands, I'd consider refactoring the Simulator class to use the [Command Pattern](http://en.wikipedia.org/wiki/Command_pattern).  That would allow easy unit testing of the individual commands.
+If I were to add any more commands, or increase the complexity of the commands, I would consider refactoring the Simulator class to use the [Command Pattern](http://en.wikipedia.org/wiki/Command_pattern).  That would allow easy unit testing of the individual commands.
 
 ## licence
 toy-robot is licensed under the GNU Lesser General Public License.
