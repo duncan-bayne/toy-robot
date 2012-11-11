@@ -31,5 +31,15 @@ describe 'Simulator' do
     @simulator.execute('REPORT').should == '1,1,SOUTH'
   end
 
+  it 'ignores PLACEs that would cause the robot to fall from the table' do
+    [ 'PLACE 0,0,NORTH', 'PLACE -1,0,NORTH', 'MOVE' ].each { |command| @simulator.execute command }
+    @simulator.execute('REPORT').should == '0,1,NORTH'
+  end
+
+  it 'ignores MOVEs that would cause the robot to fall from the table' do
+    [ 'PLACE 0,4,NORTH', 'MOVE' ].each { |command| @simulator.execute command }
+    @simulator.execute('REPORT').should == '0,4,NORTH'
+  end
+
 end
 
