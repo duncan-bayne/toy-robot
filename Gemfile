@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rspec'
-gem 'rspec-mocks'
 gem 'debugger'
 gem 'markdown'
+gem 'rake'
 gem 'roodi'
+gem 'rspec'
+gem 'rspec-mocks'
 
