@@ -68,6 +68,15 @@ With invalid commands:
 
 I developed toy-robot test first; you can see the [commit log](https://github.com/duncan-bayne/toy-robot/commits/master) for how I proceeded.
 
+I made the following assumptions:
+
+ * case-sensitivity was by design (e.g. `PLACE` but not `place`)
+ * abbreviations are not allowed (e.g. `NORTH` but not `N`)
+ * comma separators are required (e.g. `0,0,NORTH` but not `0 0 NORTH`)
+ * this is a UNIX program (so it observes the [Rule of Silence](http://www.faqs.org/docs/artu/ch01s06.html) and only reports on errors or when instructed)
+
+Depending upon the time available and the background of the intended users, those assumptions could easily be challenged.  E.g. Windows users are not used to case sensitivity or silent success.
+
 Specs, documentation and quality checks are automated through rake.  E.g. to display a list of all tasks:
 
     $ rake -T
