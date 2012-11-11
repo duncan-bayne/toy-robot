@@ -17,13 +17,13 @@ class Simulator
     when 'PLACE'
       place(arguments)
     when 'REPORT'
-      @table.placed? ? report : "Ignoring REPORT until robot is PLACEd."
+      report
     when 'MOVE'
-      @table.placed? ? move : "Ignoring MOVE until robot is PLACEd."
+      move
     when 'LEFT'
-      @table.placed? ? left : "Ignoring LEFT until robot is PLACEd."
+      left
     when 'RIGHT'
-      @table.placed? ? right : "Ignoring RIGHT until robot is PLACEd."
+      right
     else
       "Ignoring invalid command #{operator}."
     end
@@ -32,11 +32,13 @@ class Simulator
   private 
 
   def left
+    return 'Ignoring LEFT until robot is PLACEd.' unless @table.placed?
     @robot.left
     nil
   end
 
   def move
+    return 'Ignoring MOVE until robot is PLACEd.' unless @table.placed?
     vector = @robot.vector
     position = @table.position
     @table.place(position[:x] + vector[:x], position[:y] + vector[:y])
@@ -44,6 +46,8 @@ class Simulator
   end
 
   def place(position)
+    message = nil
+
     begin
       tokens = position.split(/,/)
       x = tokens[0].to_i
@@ -51,19 +55,22 @@ class Simulator
       orientation = tokens[2].downcase.to_sym
 
       @table.place(x, y) if @robot.orient(orientation)
-      nil
     rescue
-      "Ignoring PLACE with invalid arguments."
+      message = "Ignoring PLACE with invalid arguments."
     end
+
+    message
   end
 
   def report
+    return 'Ignoring REPORT until robot is PLACEd.' unless @table.placed?
     position = @table.position
     orientation = @robot.orientation
     "#{position[:x]},#{position[:y]},#{orientation.to_s.upcase}"
   end
 
   def right
+    return 'Ignoring RIGHT until robot is PLACEd.' unless @table.placed?
     @robot.right
     nil
   end

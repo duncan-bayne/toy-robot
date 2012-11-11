@@ -28,6 +28,8 @@ class Robot
       { x: -1, y: 0 }
     when :east
       { x: 1, y: 0 }
+    else
+      raise "Unknown orientation #{self.orientation}"
     end
   end
 end

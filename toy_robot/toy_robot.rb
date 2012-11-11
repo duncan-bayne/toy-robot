@@ -3,7 +3,10 @@
 require_relative 'simulator'
 
 simulator = Simulator.new
-while command = STDIN.gets
+
+command = STDIN.gets
+while command
   output = simulator.execute(command)
   puts output if output
+  command = STDIN.gets
 end
