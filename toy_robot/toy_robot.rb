@@ -2,6 +2,11 @@
 
 require_relative 'simulator'
 
+if ARGV.length > 0
+  puts File.read(File.dirname(__FILE__) + '/../README.md')
+  exit
+end
+
 simulator = Simulator.new
 
 command = STDIN.gets
