@@ -64,6 +64,49 @@ With invalid commands:
     Ignoring MOVE until robot is PLACEd.
     PLACE 1,1,NORTH
 
+## development notes
+
+I developed toy-robot test first; you can see the [commit log](https://github.com/duncan-bayne/toy-robot/commits/master) for how I proceeded.
+
+Specs, documentation and quality checks are automated through rake.  E.g. to display a list of all tasks:
+
+    $ rake -T
+    rake default        # Runs all specs and quality tests, then generates documentation
+    rake documentation  # Generates HTML documentation from Markdown files
+    rake quality        # Check for design issues in: **/*.rb
+    rake specs          # Run RSpec code examples
+
+To run everything:
+
+    $ rake
+    /home/duncan/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec spec/simulator_integration_spec.rb spec/table_
+    spec.rb spec/robot_spec.rb spec/simulator_spec.rb --backtrace                                           
+    ...................................................
+     
+    Finished in 0.01306 seconds
+    51 examples, 0 failures
+    markdown 1.0.0 on Ruby 1.9.3 (2012-04-20) [x86_64-linux]
+    searching folder '.'...
+      skipping file   'Gemfile.lock'...
+      skipping file   'README.html'...
+      skipping folder 'spec'...
+      skipping folder 'toy_robot'...
+      skipping file   '.rvmrc'...
+      skipping folder 'doc'...
+      skipping file   'Gemfile'...
+      skipping file   'Rakefile'...
+      skipping file   'COPYING'...
+      skipping file   'roodi.yml'...
+      skipping folder '.git'...
+    *** README.md (.) => README.html (.)...
+      Removing %-comments (0 lines, 0 begin/end-blocks, 0 end-blocks)...
+      Converting Markdown-text (2338 bytes) to HTML using library kramdown (0.14.0)
+      using options:
+    {}
+    Done.
+
+If I were to add any more commands, or increase the complexity of the commands, I'd consider refactoring the Simulator class to use the [Command Pattern](http://en.wikipedia.org/wiki/Command_pattern).  That would allow easy unit testing of the individual commands.
+
 ## licence
 toy-robot is licensed under the GNU Lesser General Public License.
 
