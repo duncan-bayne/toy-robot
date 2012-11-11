@@ -3,6 +3,7 @@ require 'rspec/core/rake_task'
 require 'roodi'
 require 'roodi_task'
 
+desc 'Runs all specs and quality tests, then generates documentation'
 task default: [ :specs, :quality, :documentation ]
 
 RSpec::Core::RakeTask.new(:specs) do |spec|
@@ -10,6 +11,7 @@ RSpec::Core::RakeTask.new(:specs) do |spec|
   spec.rspec_opts = ['--backtrace']
 end
 
+desc 'Generates HTML documentation from Markdown files'
 task :documentation do
   system('markdown')
 end
