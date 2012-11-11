@@ -16,15 +16,16 @@ class Simulator
     case operator
     when 'PLACE'
       place(arguments)
-      nil
     when 'REPORT'
-      report if @table.placed?
+      @table.placed? ? report : "Ignoring REPORT until robot is PLACEd."
     when 'MOVE'
-      move if @table.placed?
+      @table.placed? ? move : "Ignoring MOVE until robot is PLACEd."
     when 'LEFT'
-      left if @table.placed?
+      @table.placed? ? left : "Ignoring LEFT until robot is PLACEd."
     when 'RIGHT'
-      right if @table.placed?
+      @table.placed? ? right : "Ignoring RIGHT until robot is PLACEd."
+    else
+      "Ignoring invalid command #{operator}."
     end
   end
 
@@ -43,14 +44,17 @@ class Simulator
   end
 
   def place(position)
-    tokens = position.split(/,/)
-    x = tokens[0].to_i
-    y = tokens[1].to_i
-    orientation = tokens[2].downcase.to_sym
+    begin
+      tokens = position.split(/,/)
+      x = tokens[0].to_i
+      y = tokens[1].to_i
+      orientation = tokens[2].downcase.to_sym
 
-    @table.place(x, y)
-    @robot.orient(orientation)
-    nil
+      @table.place(x, y) if @robot.orient(orientation)
+      nil
+    rescue
+      "Ignoring PLACE with invalid arguments."
+    end
   end
 
   def report

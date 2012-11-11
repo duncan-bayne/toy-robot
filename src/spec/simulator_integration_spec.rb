@@ -41,5 +41,15 @@ describe 'Simulator' do
     @simulator.execute('REPORT').should == '0,4,NORTH'
   end
 
+  it 'ignores PLACEs with invalid orientations but valid co-ordinates' do
+    [ 'PLACE 0,0,WOMBLES' ].each { |command| @simulator.execute command }
+    @simulator.execute('REPORT').should == 'Ignoring REPORT until robot is PLACEd.'
+  end
+
+  it 'ignores PLACEs with valid orientations but invalid co-ordinates' do
+    [ 'PLACE -1,-1,NORTH' ].each { |command| @simulator.execute command }
+    @simulator.execute('REPORT').should == 'Ignoring REPORT until robot is PLACEd.'
+  end
+
 end
 

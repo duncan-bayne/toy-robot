@@ -24,20 +24,20 @@ describe 'Simulator' do
 
       describe 'LEFT' do
 
-        it 'does nothing' do
+        it 'warns the user but does nothing else' do
           @robot.should_not_receive(:left)
-          @simulator.execute('LEFT')
+          @simulator.execute('LEFT').should == 'Ignoring LEFT until robot is PLACEd.'
         end
 
       end
 
       describe 'MOVE' do
 
-        it 'does nothing' do
+        it 'warns the user but does nothing else' do
           @robot.should_not_receive(:vector)
           @table.should_not_receive(:position)
           @table.should_not_receive(:place)
-          @simulator.execute('MOVE')
+          @simulator.execute('MOVE').should == 'Ignoring MOVE until robot is PLACEd.'
         end
 
       end
@@ -46,34 +46,44 @@ describe 'Simulator' do
         
         describe 'at valid co-ordinates in a valid direction' do
 
-          it 'places the robot on the table at the specified location' do
+          it 'places the robot on the table at the specified location and orients it' do
+            @robot.should_receive(:orient).with(:north).and_return(:north)
             @table.should_receive(:place).with(0, 0)
             @simulator.execute('PLACE 0,0,NORTH')
           end
 
-          it 'configures the robot to be facing in the specified direction' do
-            @robot.should_receive(:orient).with(:north)
-            @simulator.execute('PLACE 0,0,NORTH')
+        end
+
+        describe 'at valid co-ordinates in an invalid direction' do
+
+          before do
+            @robot.should_receive(:orient).with(:wombles).and_return(nil)
           end
+
+          it 'does not place the robot on the table' do
+            @table.should_not_receive(:place)
+            @simulator.execute('PLACE 0,0,WOMBLES')
+          end
+
         end
 
       end
 
       describe 'REPORT' do
 
-        it 'does nothing' do
+        it 'warns the user but does nothing else' do
           @table.should_not_receive(:position)
           @robot.should_not_receive(:orientation)
-          @simulator.execute('REPORT').should == nil
+          @simulator.execute('REPORT').should == 'Ignoring REPORT until robot is PLACEd.'
         end
 
       end
       
       describe 'RIGHT' do
 
-        it 'does nothing' do
+        it 'warns the user but does nothing else' do
           @robot.should_not_receive(:right)
-          @simulator.execute('RIGHT')
+          @simulator.execute('RIGHT').should == 'Ignoring RIGHT until robot is PLACEd.'
         end
 
       end
@@ -112,17 +122,21 @@ describe 'Simulator' do
         
         describe 'at valid co-ordinates in a valid direction' do
 
-          it 'places the robot on the table at the specified location' do
+          it 'places the robot on the table at the specified location and orients it' do
+            @robot.should_receive(:orient).with(:north).and_return(:north)
             @table.should_receive(:place).with(0, 0)
             @simulator.execute('PLACE 0,0,NORTH')
           end
 
-          it 'configures the robot to be facing in the specified direction' do
-            @robot.should_receive(:orient).with(:north)
-            @simulator.execute('PLACE 0,0,NORTH')
-          end
         end
 
+        describe 'with invalid arguments' do
+          
+          it 'warns the user and does not place the robot on the table' do
+            @table.should_not_receive(:place)
+            @simulator.execute('PLACE SOME WOMBLES').should == 'Ignoring PLACE with invalid arguments.'
+          end
+        end
       end
 
       describe 'REPORT' do
