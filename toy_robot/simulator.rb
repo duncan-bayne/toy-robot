@@ -9,6 +9,8 @@ class Simulator
   end
 
   def execute(command)
+    return if command.strip.empty?
+
     tokens = command.split(/\s+/)
     operator = tokens.first
     arguments = tokens.last

@@ -16,6 +16,22 @@ describe 'Simulator' do
 
   describe '#execute' do
 
+    describe 'empty string' do
+
+      it 'completely ignores the command without warning the user' do
+        @simulator.execute('').should == nil
+      end
+
+    end
+
+    describe 'whitespace' do
+
+      it 'completely ignores the command without warning the user' do
+        @simulator.execute('              ').should == nil
+      end
+
+    end
+
     describe 'before the robot has been placed' do
 
       before do

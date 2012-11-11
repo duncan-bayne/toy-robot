@@ -70,6 +70,7 @@ I developed toy-robot test first; you can see the [commit log](https://github.co
 
 I made the following assumptions:
 
+ * lines that are either empty or contain only whitespace can be completely ignored
  * multiple valid PLACE statements are valid
  * case-sensitivity was by design (e.g. `PLACE` but not `place`)
  * abbreviations are not allowed (e.g. `NORTH` but not `N`)
