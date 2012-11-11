@@ -6,6 +6,10 @@ class Table
     self.position = { x: x, y: y } if valid_coordinates?(x, y) 
   end
 
+  def placed?
+    self.position != nil
+  end
+
   private
 
   def valid_coordinates?(x, y)

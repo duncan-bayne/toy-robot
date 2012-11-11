@@ -18,13 +18,13 @@ class Simulator
       place(arguments)
       nil
     when 'REPORT'
-      report
+      report if @table.placed?
     when 'MOVE'
-      move
+      move if @table.placed?
     when 'LEFT'
-      left
+      left if @table.placed?
     when 'RIGHT'
-      right
+      right if @table.placed?
     end
   end
 

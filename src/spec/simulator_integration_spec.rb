@@ -26,5 +26,10 @@ describe 'Simulator' do
     @simulator.execute('REPORT').should == '3,3,NORTH'
   end
 
+  it 'ignores commands before a place' do
+    [ 'MOVE', 'LEFT', 'RIGHT', 'PLACE 1,1,SOUTH' ].each { |command| @simulator.execute command }
+    @simulator.execute('REPORT').should == '1,1,SOUTH'
+  end
+
 end
 

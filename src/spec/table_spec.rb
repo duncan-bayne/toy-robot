@@ -30,6 +30,38 @@ describe 'Table' do
 
   end
 
+  describe '#placed?' do
+
+    it 'is initially false' do
+      @table.placed?.should == false
+    end
+
+    describe 'after a valid placement' do
+
+      before do
+        @table.place(0, 0)
+      end
+
+      it 'returns true' do
+        @table.placed?.should == true
+      end
+
+    end
+
+    describe 'after an invalid placement' do
+
+      before do
+        @table.place(-1, -1)
+      end
+
+      it 'returns false' do
+        @table.placed?.should == false
+      end
+
+    end
+  end
+  
+
   describe '#position' do
 
     it 'is initially nil' do
@@ -47,18 +79,18 @@ describe 'Table' do
       end
 
     end
-  end
 
-  describe 'after an invalid placement' do
+    describe 'after an invalid placement' do
 
-    before do
-      @table.place(-1, -1)
+      before do
+        @table.place(-1, -1)
+      end
+
+      it 'remains nil after an invalid placement' do
+        @table.position.should == nil
+      end
+
     end
 
-    it 'remains nil after an invalid placement' do
-      @table.position.should == nil
-    end
-
   end
-
 end
