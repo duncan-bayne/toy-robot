@@ -83,6 +83,8 @@ I made the following assumptions:
 
 Depending upon the time available and the background of the intended users, some of those assumptions could easily be challenged.  E.g. Windows users are not used to case sensitivity or silent success.
 
+Existing issues can be logged on the [Issues](https://github.com/duncan-bayne/toy-robot/issues/) page; there is already one related to documentation generation.
+
 Specs, documentation and quality checks are automated through rake.  E.g. to display a list of all tasks:
 
     $ rake -T
