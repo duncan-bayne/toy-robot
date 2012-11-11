@@ -4,4 +4,5 @@ gem 'rspec'
 gem 'rspec-mocks'
 gem 'debugger'
 gem 'markdown'
+gem 'roodi'
 
