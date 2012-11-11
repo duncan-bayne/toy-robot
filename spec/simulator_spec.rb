@@ -62,7 +62,7 @@ describe 'Simulator' do
 
           it 'does not place the robot on the table' do
             @table.should_not_receive(:place)
-            @simulator.execute('PLACE 0,0,WOMBLES')
+            @simulator.execute('PLACE 0,0,WOMBLES').should == 'Ignoring PLACE with invalid arguments.'
           end
 
         end

@@ -43,8 +43,17 @@ From a file `instructions.txt` containing instructions:
     $ cat instructions.txt | toy_robot/toy_robot.rb 
     0,0,NORTH
 
+With invalid commands:
+
+    $ toy_robot/toy_robot.rb 
+    PLACE 0,0,WOMBLES
+    Ignoring PLACE with invalid arguments.
+    MOVE
+    Ignoring MOVE until robot is PLACEd.
+    PLACE 1,1,NORTH
+
 ## licence
 toy-robot is licensed under the GNU Lesser General Public License.
 
 ### why the LGPL?
-The GPL is specifically designed to reduce the usefulness of GPL-licensed code to closed-source, proprietary software. The BSD license (and similar) don't mandate code-sharing if the BSD-licensed code is modified by licensees. The LGPL achieves the best of both worlds: an LGPL-licensed library can be incorporated within closed-source proprietary code, and yet those using an LGPL-licensed library are required to release source code to that library if they change it.
+The GPL is specifically designed to reduce the usefulness of GPL-licensed code to closed-source, proprietary software. The BSD license (and similar) do not mandate code-sharing if the BSD-licensed code is modified by licensees. The LGPL achieves the best of both worlds: an LGPL-licensed library can be incorporated within closed-source proprietary code, and yet those using an LGPL-licensed library are required to release source code to that library if they change it.

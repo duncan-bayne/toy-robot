@@ -54,7 +54,9 @@ class Simulator
       y = tokens[1].to_i
       orientation = tokens[2].downcase.to_sym
 
-      @table.place(x, y) if @robot.orient(orientation)
+      unless @robot.orient(orientation) && @table.place(x, y)
+        message = "Ignoring PLACE with invalid arguments."
+      end
     rescue
       message = "Ignoring PLACE with invalid arguments."
     end
