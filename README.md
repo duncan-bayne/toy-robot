@@ -28,24 +28,24 @@ Announces the X,Y and F of the robot.
 
 ### installing
 
-Ensure you have [Git](http://git-scm.com/downloads) and either [Ruby 1.9.3](http://www.ruby-lang.org/en/downloads/) or [RVM](https://rvm.io/rvm/install/) installed.  Then in a console execute:
+Ensure you have [Git](http://git-scm.com/downloads) and [Ruby 2.2.2](http://www.ruby-lang.org/en/downloads/) installed.  Optionally, install [rbenv](https://github.com/sstephenson/rbenv) to manage Ruby versions, and [editorconfig](http://editorconfig.org/) for automatic editor configuration.
+
+Then, in a console execute:
 
     git clone git://github.com/duncan-bayne/toy-robot.git
     cd toy-robot
     gem install bundler
     bundle install
 
-RVM will prompt you if you need to install the version of Ruby upon which toy-robot relies (1.9.3).
-
 ### supported operating systems
 
-toy-robot *should* install on pretty much any recent UNIX or UNIX-like operating system, and Microsoft Windows.  I have tested it on 64-bit Linux Mint 13 (Maya) and 32-bit Windows 7.
+toy-robot *should* install on pretty much any recent UNIX or UNIX-like operating system, and Microsoft Windows.  I have tested it on 64-bit Linux Mint 17.2 (Rafaela).
 
 ### running
 
 Interactively:
 
-    $ toy_robot/toy_robot.rb 
+    $ toy_robot/toy_robot.rb
     PLACE 1,1,SOUTH
     MOVE
     LEFT
@@ -56,12 +56,12 @@ Interactively:
 
 From a file `instructions.txt` containing instructions:
 
-    $ cat instructions.txt | toy_robot/toy_robot.rb 
+    $ cat instructions.txt | toy_robot/toy_robot.rb
     0,0,NORTH
 
 With invalid commands:
 
-    $ toy_robot/toy_robot.rb 
+    $ toy_robot/toy_robot.rb
     PLACE 0,0,WOMBLES
     Ignoring PLACE with invalid arguments.
     MOVE
@@ -96,31 +96,18 @@ Specs, documentation and quality checks are automated through rake.  E.g. to dis
 To run everything:
 
     $ rake
-    /home/duncan/.rvm/rubies/ruby-1.9.3-p194/bin/ruby -S rspec spec/simulator_integration_spec.rb spec/table_
-    spec.rb spec/robot_spec.rb spec/simulator_spec.rb --backtrace                                           
-    ...................................................
-     
-    Finished in 0.01306 seconds
-    51 examples, 0 failures
-    markdown 1.0.0 on Ruby 1.9.3 (2012-04-20) [x86_64-linux]
-    searching folder '.'...
-      skipping file   'Gemfile.lock'...
-      skipping file   'README.html'...
-      skipping folder 'spec'...
-      skipping folder 'toy_robot'...
-      skipping file   '.rvmrc'...
-      skipping folder 'doc'...
-      skipping file   'Gemfile'...
-      skipping file   'Rakefile'...
-      skipping file   'COPYING'...
-      skipping file   'roodi.yml'...
-      skipping folder '.git'...
-    *** README.md (.) => README.html (.)...
-      Removing %-comments (0 lines, 0 begin/end-blocks, 0 end-blocks)...
-      Converting Markdown-text (2338 bytes) to HTML using library kramdown (0.14.0)
-      using options:
-    {}
-    Done.
+    /home/duncan/.rbenv/versions/2.2.2/bin/ruby -I/home/duncan/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rspec-support-3.3.0/lib:/home/duncan/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rspec-core-3.3.2/lib /home/duncan/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rspec-core-3.3.2/exe/rspec --pattern spec/\*_spec.rb --backtrace
+    .......................................................
+
+    Finished in 0.02732 seconds (files took 0.15434 seconds to load)
+    55 examples, 0 failures
+
+    Coverage report generated for RSpec to /home/duncan/toy-robot/coverage. 243 / 245 LOC (99.18%) covered.
+
+    Running Roodi checks
+
+    Checked 9 files
+    Found 0 errors.
 
 If I were to add any more commands, or increase the complexity of the commands, I would consider refactoring the Simulator class to use the [Command Pattern](http://en.wikipedia.org/wiki/Command_pattern).  That would allow easy unit testing of the individual commands.
 
