@@ -4,7 +4,7 @@ require 'roodi'
 require 'roodi_task'
 
 desc 'Runs all specs and quality tests, then generates documentation'
-task default: [ :specs, :quality, :documentation ]
+task default: [ :specs, :roodi, :documentation ]
 
 RSpec::Core::RakeTask.new(:specs) do |spec|
   spec.pattern = 'spec/*_spec.rb'
@@ -16,7 +16,7 @@ task :documentation do
   system('markdown')
 end
 
-RoodiTask.new(:quality) do |t|
+RoodiTask.new do |t|
   t.verbose = true
   t.config = File.dirname(__FILE__) + '/roodi.yml'
   t.patterns = [ '**/*.rb' ]

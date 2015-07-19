@@ -1,23 +1,24 @@
 # default Roodi config modified as per http://asr.hatenablog.com/entry/2012/06/03/235309
-AssignmentInConditionalCheck:    { }
-CaseMissingElseCheck:            { }
-ClassLineCountCheck:             { line_count: 300 }
+AssignmentInConditionalCheck:
+CaseMissingElseCheck:
+ClassLineCountCheck:
+  line_count: 300
 ClassNameCheck:
-  pattern:
-    !ruby/regexp /^[A-Z][a-zA-Z0-9]*$/
-ClassVariableCheck:              { }
-CyclomaticComplexityBlockCheck:  { complexity: 4 }
-CyclomaticComplexityMethodCheck: { complexity: 8 }
-EmptyRescueBodyCheck:            { }
-ForLoopCheck:                    { }
-MethodLineCountCheck:            { line_count: 20 }
+  pattern: !ruby/regexp /^[A-Z][a-zA-Z0-9]*$/
+ClassVariableCheck:
+CyclomaticComplexityBlockCheck:
+  complexity: 4
+CyclomaticComplexityMethodCheck:
+  complexity: 8
+EmptyRescueBodyCheck:
+ForLoopCheck:
+MethodLineCountCheck:
+  line_count: 20
 MethodNameCheck:
-  pattern:
-    !ruby/regexp /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/
-# MissingForeignKeyIndexCheck:     { }
-ModuleLineCountCheck:            { line_count: 300 }
+  pattern: !ruby/regexp /^[_a-z<>=\[|+-\/\*`]+[_a-z0-9_<>=~@\[\]]*[=!\?]?$/
+ModuleLineCountCheck:
+  line_count: 300
 ModuleNameCheck:
-  pattern:
-    !ruby/regexp /^[A-Z][a-zA-Z0-9]*$/
-ParameterNumberCheck:            { parameter_count: 5 }
- 
+  pattern: !ruby/regexp /^[A-Z][a-zA-Z0-9]*$/
+ParameterNumberCheck:
+  parameter_count: 5
