@@ -2,95 +2,79 @@ require 'spec_helper'
 
 describe 'Table' do
 
-  before do
-    @table = Table.new
-  end
+  let(:table) { Table.new }
 
   describe '#place' do
 
     it 'allows placement' do
-      @table.place(0, 0).should_not == nil
+      expect(table.place(0, 0)).not_to be_nil
     end
 
     it 'disallows placement at X co-ordinates < 0' do
-      @table.place(-1, 0).should == nil
+      expect(table.place(-1, 0)).to be_nil
     end
 
     it 'disallows placement at X co-ordinates > 4' do
-      @table.place(5, 0).should == nil
+      expect(table.place(5, 0)).to be_nil
     end
 
     it 'disallows placement at Y co-ordinates < 0' do
-      @table.place(0, -1).should == nil
+      expect(table.place(0, -1)).to be_nil
     end
 
     it 'disallows placement at Y co-ordinates > 4' do
-      @table.place(0, 5).should == nil
+      expect(table.place(0, 5)).to be_nil
     end
-
   end
 
   describe '#placed?' do
 
     it 'is initially false' do
-      @table.placed?.should == false
+      expect(table.placed?).to be false
     end
 
     describe 'after a valid placement' do
 
-      before do
-        @table.place(0, 0)
-      end
+      before { table.place(0, 0) }
 
       it 'returns true' do
-        @table.placed?.should == true
+        expect(table.placed?).to be true
       end
-
     end
 
     describe 'after an invalid placement' do
 
-      before do
-        @table.place(-1, -1)
-      end
+      before { table.place(-1, -1) }
 
       it 'returns false' do
-        @table.placed?.should == false
+        expect(table.placed?).to be false
       end
-
     end
   end
-  
+
 
   describe '#position' do
 
     it 'is initially nil' do
-      @table.position.should == nil
+      expect(table.position).to be_nil
     end
 
     describe 'after a valid placement' do
 
-      before do
-        @table.place(0, 0)
-      end
+      before { table.place(0, 0) }
 
       it 'returns the co-ordinates of the placement' do
-        @table.position.should == { x: 0, y: 0 }
+        expect(table.position).to eq(x: 0, y: 0)
       end
-
     end
 
     describe 'after an invalid placement' do
 
-      before do
-        @table.place(-1, -1)
-      end
+      before { table.place(-1, -1) }
 
       it 'remains nil after an invalid placement' do
-        @table.position.should == nil
+        expect(table.position).to be_nil
       end
-
     end
-
   end
 end

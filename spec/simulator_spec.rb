@@ -1,17 +1,16 @@
 require 'spec_helper'
 
 describe 'Simulator' do
+  let(:robot) { double('robot') }
+  let(:simulator) { Simulator.new }
+  let(:table) { double('table') }
 
   before do
-    @table = double('table')
-    @table.stub(:place)
-    Table.stub(:new).and_return(@table)
+    allow(table).to receive(:place)
+    allow(Table).to receive(:new).and_return(table)
 
-    @robot = double('robot')
-    @robot.stub(:orient)
-    Robot.stub(:new).and_return(@robot)
-
-    @simulator = Simulator.new
+    allow(robot).to receive(:orient)
+    allow(Robot).to receive(:new).and_return(robot)
   end
 
   describe '#execute' do
@@ -19,178 +18,179 @@ describe 'Simulator' do
     describe 'empty string' do
 
       it 'completely ignores the command without warning the user' do
-        @simulator.execute('').should == nil
+        expect(simulator.execute('')).to be_nil
       end
-
     end
 
     describe 'whitespace' do
 
       it 'completely ignores the command without warning the user' do
-        @simulator.execute('              ').should == nil
+        expect(simulator.execute('              ')).to be_nil
       end
-
     end
 
     describe 'before the robot has been placed' do
 
-      before do
-        @table.stub(:placed?).and_return(false)
-      end
+      before { allow(table).to receive(:placed?).and_return(false) }
 
       describe 'LEFT' do
 
-        it 'warns the user but does nothing else' do
-          @robot.should_not_receive(:left)
-          @simulator.execute('LEFT').should == 'Ignoring LEFT until robot is PLACEd.'
-        end
+        before { expect(robot).not_to receive(:left) }
 
+        it 'warns the user but does nothing else' do
+          expect(simulator.execute('LEFT')).to eq('Ignoring LEFT until robot is PLACEd.')
+        end
       end
 
       describe 'MOVE' do
 
-        it 'warns the user but does nothing else' do
-          @robot.should_not_receive(:vector)
-          @table.should_not_receive(:position)
-          @table.should_not_receive(:place)
-          @simulator.execute('MOVE').should == 'Ignoring MOVE until robot is PLACEd.'
+        before do
+          expect(robot).not_to receive(:vector)
+          expect(table).not_to receive(:position)
+          expect(table).not_to receive(:place)
         end
 
+        it 'warns the user but does nothing else' do
+          expect(simulator.execute('MOVE')).to eq('Ignoring MOVE until robot is PLACEd.')
+        end
       end
 
       describe 'PLACE' do
-        
+
         describe 'at valid co-ordinates in a valid direction' do
 
-          it 'places the robot on the table at the specified location and orients it' do
-            @robot.should_receive(:orient).with(:north).and_return(:north)
-            @table.should_receive(:place).with(0, 0)
-            @simulator.execute('PLACE 0,0,NORTH')
+          before do
+            expect(robot).to receive(:orient).with(:north).and_return(:north)
+            expect(table).to receive(:place).with(0, 0)
           end
 
+          it 'places the robot on the table at the specified location and orients it' do
+            simulator.execute('PLACE 0,0,NORTH')
+          end
         end
 
         describe 'at valid co-ordinates in an invalid direction' do
 
           before do
-            @robot.should_receive(:orient).with(:wombles).and_return(nil)
+            expect(robot).to receive(:orient).with(:wombles).and_return(nil)
+            expect(table).not_to receive(:place)
           end
 
           it 'does not place the robot on the table' do
-            @table.should_not_receive(:place)
-            @simulator.execute('PLACE 0,0,WOMBLES').should == 'Ignoring PLACE with invalid arguments.'
+            expect(simulator.execute('PLACE 0,0,WOMBLES')).to eq('Ignoring PLACE with invalid arguments.')
           end
-
         end
-
       end
 
       describe 'REPORT' do
 
-        it 'warns the user but does nothing else' do
-          @table.should_not_receive(:position)
-          @robot.should_not_receive(:orientation)
-          @simulator.execute('REPORT').should == 'Ignoring REPORT until robot is PLACEd.'
+        before do
+          expect(table).not_to receive(:position)
+          expect(robot).not_to receive(:orientation)
         end
 
+        it 'warns the user but does nothing else' do
+          expect(simulator.execute('REPORT')).to eq('Ignoring REPORT until robot is PLACEd.')
+        end
       end
-      
+
       describe 'RIGHT' do
 
+        before { expect(robot).not_to receive(:right) }
+
         it 'warns the user but does nothing else' do
-          @robot.should_not_receive(:right)
-          @simulator.execute('RIGHT').should == 'Ignoring RIGHT until robot is PLACEd.'
+          expect(simulator.execute('RIGHT')).to eq('Ignoring RIGHT until robot is PLACEd.')
         end
-
       end
-
     end
 
     describe 'after the robot has been placed' do
 
-      before do
-        @table.stub(:placed?).and_return(true)
-      end
+      before { allow(table).to receive(:placed?).and_return(true) }
 
       describe 'LEFT' do
 
-        it 'instructs the robot to turn left' do
-          @robot.should_receive(:left)
-          
-          @simulator.execute('LEFT')
-        end
+        before { expect(robot).to receive(:left) }
 
+        it 'instructs the robot to turn left' do
+          simulator.execute('LEFT')
+        end
       end
 
       describe 'MOVE' do
 
         describe 'to a valid place on the table' do
 
-          it 'retrieves a movement vector from the robot and applies it to the table' do
-            @robot.should_receive(:vector).and_return({ x: 1, y: 1 })
-            @table.should_receive(:position).and_return({ x: 1, y: 1 })
-            @table.should_receive(:place).with(2, 2)
-
-            @simulator.execute('MOVE')
+          before do
+            expect(robot).to receive(:vector).and_return({ x: 1, y: 1 })
+            expect(table).to receive(:position).and_return({ x: 1, y: 1 })
+            expect(table).to receive(:place).with(2, 2)
           end
 
+          it 'retrieves a movement vector from the robot and applies it to the table' do
+            simulator.execute('MOVE')
+          end
         end
 
         describe 'off the table' do
 
-          it 'warns the user and does not move the robot off the table' do
-            @robot.should_receive(:vector).and_return({ x: 1, y: 1 })
-            @table.should_receive(:position).and_return({ x: 4, y: 4 })
-            @table.should_receive(:place).with(5, 5).and_return(nil)
+          before do
+            expect(robot).to receive(:vector).and_return({ x: 1, y: 1 })
+            expect(table).to receive(:position).and_return({ x: 4, y: 4 })
+            expect(table).to receive(:place).with(5, 5).and_return(nil)
+          end
 
-            @simulator.execute('MOVE').should == 'Ignoring MOVE off the table.'
+          it 'warns the user and does not move the robot off the table' do
+            expect(simulator.execute('MOVE')).to eq('Ignoring MOVE off the table.')
           end
 
         end
-
       end
 
       describe 'PLACE' do
-        
+
         describe 'at valid co-ordinates in a valid direction' do
 
-          it 'places the robot on the table at the specified location and orients it' do
-            @robot.should_receive(:orient).with(:north).and_return(:north)
-            @table.should_receive(:place).with(0, 0)
-            @simulator.execute('PLACE 0,0,NORTH')
+          before do
+            expect(robot).to receive(:orient).with(:north).and_return(:north)
+            expect(table).to receive(:place).with(0, 0)
           end
 
+          it 'places the robot on the table at the specified location and orients it' do
+            simulator.execute('PLACE 0,0,NORTH')
+          end
         end
 
         describe 'with invalid arguments' do
-          
+
+          before { expect(table).not_to receive(:place) }
+
           it 'warns the user and does not place the robot on the table' do
-            @table.should_not_receive(:place)
-            @simulator.execute('PLACE SOME WOMBLES').should == 'Ignoring PLACE with invalid arguments.'
+            expect(simulator.execute('PLACE SOME WOMBLES')).to eq('Ignoring PLACE with invalid arguments.')
           end
         end
       end
 
       describe 'REPORT' do
 
-        it 'returns the result in specified format' do
-          @table.should_receive(:position).and_return({ x: 1, y: 2 })
-          @robot.should_receive(:orientation).and_return(:south)
-          @simulator.execute('REPORT').should == '1,2,SOUTH'
+        before do
+          expect(table).to receive(:position).and_return({ x: 1, y: 2 })
+          expect(robot).to receive(:orientation).and_return(:south)
         end
 
+        it 'returns the result in specified format' do
+          expect(simulator.execute('REPORT')).to eq('1,2,SOUTH')
+        end
       end
-      
+
       describe 'RIGHT' do
 
+        before { expect(robot).to receive(:right) }
+
         it 'instructs the robot to turn right' do
-          @robot.should_receive(:right)
-          
-          @simulator.execute('RIGHT')
+          simulator.execute('RIGHT')
         end
-
       end
-
     end
   end
 end
