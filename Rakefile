@@ -13,7 +13,8 @@ end
 
 desc 'Generates HTML documentation from Markdown files'
 task :documentation do
-  system('markdown')
+  system('redcarpet README.md > README.html') or raise 'unable to generate README.html'
+  system('redcarpet doc/specification.md > doc/specification.html') or raise 'unable to generate specification.html'
 end
 
 RoodiTask.new do |t|
