@@ -70,7 +70,7 @@ With invalid commands:
 
 ## development notes
 
-I developed toy-robot test first; you can see the [commit log](https://github.com/duncan-bayne/toy-robot/commits/master) for how I proceeded, and how I updated to the latest Ruby and Gems in 2015.
+I developed toy-robot test first; you can see the [commit log](https://github.com/duncan-bayne/toy-robot/commits/master) for how I proceeded, and how I subsequently kept the code on current library and Ruby versions.
 
 I made the following assumptions:
 
