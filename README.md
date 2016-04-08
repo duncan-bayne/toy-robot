@@ -28,7 +28,7 @@ Announces the X,Y and F of the robot.
 
 ### installing
 
-Ensure you have [Git](http://git-scm.com/downloads) and [Ruby 2.2.2](http://www.ruby-lang.org/en/downloads/) installed.  Optionally, install [rbenv](https://github.com/sstephenson/rbenv) to manage Ruby versions, and [editorconfig](http://editorconfig.org/) for automatic editor configuration.
+Ensure you have [Git](http://git-scm.com/downloads) and [Ruby 2.3.0](http://www.ruby-lang.org/en/downloads/) installed.  Optionally, install [rbenv](https://github.com/sstephenson/rbenv) to manage Ruby versions, and [editorconfig](http://editorconfig.org/) for automatic editor configuration.
 
 Then, in a console execute:
 
