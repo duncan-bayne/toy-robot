@@ -39,7 +39,7 @@ Then, in a console execute:
 
 ### supported operating systems
 
-toy-robot *should* install on pretty much any recent UNIX or UNIX-like operating system, and Microsoft Windows.  I've tested it on 64-bit Linux Mint 17.2 (Rafaela).
+toy-robot *should* install on pretty much any recent UNIX or UNIX-like operating system, and Microsoft Windows.  I've tested it on 64-bit Linux Mint 17.3 (Rosa).
 
 ### running
 
