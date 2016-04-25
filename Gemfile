@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'arghspec'
 gem 'guard-rspec'
 gem 'rake'
 gem 'redcarpet'
