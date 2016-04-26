@@ -16,6 +16,9 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
+    guard-ctags-bundler (1.4.0)
+      guard (>= 2.0)
+      guard-compat (>= 0.1.0)
     guard-rspec (4.6.5)
       guard (~> 2.1)
       guard-compat (~> 1.1)
@@ -70,6 +73,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  guard-ctags-bundler
   guard-rspec
   rake
   redcarpet
